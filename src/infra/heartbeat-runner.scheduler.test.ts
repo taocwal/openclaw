@@ -202,4 +202,30 @@ describe("startHeartbeatRunner", () => {
 
     runner.stop();
   });
-});
+
+  it("clamps very large heartbeat intervals to safe timer bounds", async () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date(0));
+
+    const runSpy = vi.fn().mockResolvedValue({ status: "ran", durationMs: 1 });
+    const setTimeoutSpy = vi.spyOn(global, "setTimeout");
+
+    const cfg = {
+      agents: { defaults: { heartbeat: { every: "999h" } } },
+    } as OpenClawConfig;
+
+    const runner = startHeartbeatRunner({ cfg, runOnce: runSpy });
+
+    expect(setTimeoutSpy).toHaveBeenCalled();
+    const firstDelay = setTimeoutSpy.mock.calls[0]?.[1] as number | undefined;
+    expect(firstDelay).toBeGreaterThan(0);
+    expect(firstDelay).toBeLessThanOrEqual(2_147_483_647);
+
+    // Advance time by the full configured interval (999h) to ensure a heartbeat fires.
+    await vi.advanceTimersByTimeAsync(999 * 60 * 60 * 1000 + 1);
+    expect(runSpy).toHaveBeenCalledTimes(1);
+
+    runner.stop();
+    setTimeoutSpy.mockRestore();
+  });
+}
