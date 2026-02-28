@@ -217,7 +217,7 @@ describe("startHeartbeatRunner", () => {
     const runner = startHeartbeatRunner({ cfg, runOnce: runSpy });
 
     expect(setTimeoutSpy).toHaveBeenCalled();
-    const firstDelay = setTimeoutSpy.mock.calls[0]?.[1] as number | undefined;
+    const firstDelay = setTimeoutSpy.mock.calls[0]?.[1];
     expect(firstDelay).toBeGreaterThan(0);
     expect(firstDelay).toBeLessThanOrEqual(2_147_483_647);
 
