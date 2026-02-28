@@ -228,4 +228,4 @@ describe("startHeartbeatRunner", () => {
     runner.stop();
     setTimeoutSpy.mockRestore();
   });
-}
+});
