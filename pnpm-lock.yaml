@@ -134,9 +134,6 @@ importers:
       ignore:
         specifier: 7.0.5
         version: 7.0.5
-      ipaddr.js:
-        specifier: 2.4.0
-        version: 2.4.0
       jiti:
         specifier: 2.7.0
         version: 2.7.0
@@ -1691,6 +1688,15 @@ importers:
       typebox:
         specifier: 1.1.38
         version: 1.1.38
+    devDependencies:
+      '@openclaw/plugin-sdk':
+        specifier: workspace:*
+        version: link:../../packages/plugin-sdk
+      openclaw:
+        specifier: workspace:*
+        version: link:../..
+
+  extensions/workboard:
     devDependencies:
       '@openclaw/plugin-sdk':
         specifier: workspace:*
