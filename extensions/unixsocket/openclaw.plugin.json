@@ -1,0 +1,71 @@
+{
+  "id": "unixsocket",
+  "activation": {
+    "onStartup": false
+  },
+  "enabledByDefault": true,
+  "providers": ["unixsocket"],
+  "providerRequest": {
+    "providers": {
+      "unixsocket": {
+        "family": "unixsocket",
+        "openAICompletions": {
+          "supportsStreamingUsage": true
+        }
+      }
+    }
+  },
+  "modelPricing": {
+    "providers": {
+      "unixsocket": {
+        "external": false
+      }
+    }
+  },
+  "nonSecretAuthMarkers": ["unixsocket-local"],
+  "providerAuthEnvVars": {
+    "unixsocket": []
+  },
+  "providerAuthChoices": [
+    {
+      "provider": "unixsocket",
+      "method": "custom",
+      "choiceId": "unixsocket",
+      "choiceLabel": "Unix Socket",
+      "choiceHint": "Local on-device AI model daemon via Unix Domain Socket",
+      "optionKey": "unixsocketApiKey",
+      "cliFlag": "--unixsocket-api-key",
+      "cliOption": "--unixsocket-api-key <key>",
+      "cliDescription": "Unix Socket provider API key",
+      "groupId": "unixsocket",
+      "groupLabel": "Unix Socket",
+      "groupHint": "Local on-device AI models"
+    }
+  ],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "socketPath": {
+        "type": "string",
+        "description": "Unix Domain Socket path for the AI model daemon"
+      },
+      "modelId": {
+        "type": "string",
+        "description": "Model ID to use with the daemon"
+      },
+      "connectTimeoutMs": {
+        "type": "number",
+        "description": "Connection timeout in milliseconds (default: 10000)"
+      },
+      "readTimeoutMs": {
+        "type": "number",
+        "description": "Read timeout in milliseconds (default: 120000)"
+      },
+      "maxRetries": {
+        "type": "number",
+        "description": "Maximum connection retry attempts (default: 3)"
+      }
+    }
+  }
+}

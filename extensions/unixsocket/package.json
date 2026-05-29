@@ -1,0 +1,21 @@
+{
+  "name": "@taocwal/unixsocket-provider",
+  "version": "2026.5.15",
+  "private": true,
+  "description": "OpenClaw Unix Socket provider plugin for on-device AI model daemon",
+  "type": "module",
+  "dependencies": {
+    "@mariozechner/pi-ai": "0.73.0"
+  },
+  "openclaw": {
+    "extensions": [
+      "./index.ts"
+    ],
+    "compat": {
+      "pluginApi": ">=2026.5.15"
+    },
+    "build": {
+      "openclawVersion": "2026.5.15"
+    }
+  }
+}
